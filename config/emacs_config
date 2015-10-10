@@ -1,0 +1,60 @@
+(global-font-lock-mode t)
+(setq c-default-style "ellemtel")
+(setq scroll-step 1)
+(setq-default indent-tabs-mode nil)
+(set-input-mode (car (current-input-mode)) (nth 1 (current-input-mode)) 0)
+(global-set-key "\C-x\C-a" 'speedbar-get-focus)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+;Turn off menu-bar
+(menu-bar-mode -1)
+;Indentation and newline after RET
+(defun custom-indent ()
+  "Customized indentation with newline"
+  (interactive)
+  (indent-according-to-mode)
+  (newline-and-indent))
+(global-set-key (kbd "RET") 'custom-indent)
+
+;one line scrolling keys (without moving pointer):
+(defun scroll-one-up ()
+"Scrolls screen one line up"
+(interactive)
+(scroll-up 1))
+
+(defun scroll-one-down ()
+"Scrolls screen one line up"
+(interactive)
+(scroll-down 1))
+
+(global-set-key (kbd "M-n") 'scroll-one-up)
+(global-set-key (kbd "M-p") 'scroll-one-down)
+
+;Window switching with C-j and C-J
+(defun other-window-backward (&optional n)
+"Select Nth previous window."
+(interactive "P")
+(other-window (- (prefix-numeric-value n))))
+
+(defun other-window-forward (&optional n)
+"Select Nth next window."
+(interactive "P")
+(other-window (prefix-numeric-value n)))
+
+;enable when better key bindings found
+;(global-set-key (kbd "C-j") 'other-window-backward)
+;(global-set-key (kbd "C-J") 'other-window-forward)
+
+;Code completion:
+;(global-ede-mode 1)
+;(semantic-mode)
+;(global-semantic-idle-completions-mode)
+;(global-semantic-idle-summary-mode)
+;(semantic-load-enable-gaudy-code-helpers)
+
+;(global-set-key (kbd "C-c >") 'semantic-complete-analyze-inline-idle)
+;(global-set-key (kbd "M-e") 'semantic-ia-fast-jump)
+
+;(setq-mode-local c-mode
+;		 semantic-find-default-throttle
+;		 '(local project unloaded recursive))
