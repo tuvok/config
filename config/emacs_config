@@ -14,6 +14,14 @@
 ;Turn off menu-bar
 (menu-bar-mode -1)
 
+;Key bindings help
+(require 'which-key)
+(which-key-mode)
+
+;Git integration
+(require 'magit)
+(global-set-key (kbd "C-x g s") 'magit-status)
+
 ;----------------------------------------------
 ;Indentation and newline after RET
 (defun custom-indent ()
