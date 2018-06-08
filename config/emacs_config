@@ -3,7 +3,7 @@
 (setq scroll-step 1)
 (setq-default indent-tabs-mode nil)
 (set-input-mode (car (current-input-mode)) (nth 1 (current-input-mode)) 0)
-(global-set-key "\C-x\C-a" 'speedbar-get-focus)
+;(global-set-key "\C-x\C-a" 'speedbar-get-focus)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;Turn off menu-bar
@@ -58,3 +58,9 @@
 ;(setq-mode-local c-mode
 ;		 semantic-find-default-throttle
 ;		 '(local project unloaded recursive))
+
+;Org-mode configurations:
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c b") 'org-switchb)
