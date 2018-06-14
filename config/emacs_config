@@ -10,6 +10,8 @@
 (set-input-mode (car (current-input-mode)) (nth 1 (current-input-mode)) 0)
 (global-set-key "\C-x\C-a" 'speedbar-get-focus)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(global-set-key (kbd "C-o") 'other-window)
+
 
 ;Turn off menu-bar
 (menu-bar-mode -1)
@@ -93,8 +95,7 @@
     (define-key c-mode-base-map (kbd "M-?") 'rtags-display-summary)
     (define-key c-mode-base-map (kbd "s-B") 'rtags-location-stack-back)
     (define-key c-mode-base-map (kbd "s-F") 'rtags-location-stack-forward)
-    (define-key c-mode-base-map (kbd "C-D") 'rtags-diagnostics)
-    (define-key c-mode-base-map (kbd "C-o") 'other-window)
+    (define-key c-mode-base-map (kbd "C-S-D") 'rtags-diagnostics)
 
     (rtags-enable-standard-keybindings)
 
