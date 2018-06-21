@@ -2,16 +2,20 @@
 
 (require 'package)
 (package-initialize)
+(add-to-list
+ 'package-archives
+ '("melpa" . "http://stable.melpa.org/packages/")
+ ;;  '("melpa" . "http://melpa.milkbox.net/packages/")
+ t)
 
 (global-font-lock-mode t)
 (setq c-default-style "ellemtel")
 (setq scroll-step 1)
 (setq-default indent-tabs-mode nil)
 (set-input-mode (car (current-input-mode)) (nth 1 (current-input-mode)) 0)
-(global-set-key "\C-x\C-a" 'speedbar-get-focus)
+;(global-set-key "\C-x\C-a" 'speedbar-get-focus)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (global-set-key (kbd "C-o") 'other-window)
-
 
 ;Turn off menu-bar
 (menu-bar-mode -1)
@@ -23,6 +27,15 @@
 ;Git integration
 (require 'magit)
 (global-set-key (kbd "C-x g s") 'magit-status)
+
+;Gentoo doesn't have /usr/local in package search path:
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
+;Add directory for user-local packages
+;(add-to-list 'load-path "~/.emacs.d/local")
+;(require 'local-config)
+
+;Dark background, fix for company - doesn't work
+;(setq frame-background-mode "dark")
 
 ;----------------------------------------------
 ;Indentation and newline after RET
@@ -80,6 +93,11 @@
 ;		 semantic-find-default-throttle
 ;		 '(local project unloaded recursive))
 
+;Org-mode configurations:
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c b") 'org-switchb)
 
 ;----------------------------------------------
 ;RTAGS
@@ -103,8 +121,9 @@
 ;    (setq rtags-use-helm t)
 
     ;; Start rdm when entering c/c++ modes
-    ;(add-hook 'c-mode-hook 'rtags-start-process-unless-running)
-    ;(add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
+    ;(setq rtags-rdm-includes "/usr/include;/usr/lib64/gcc/x86_64-pc-linux-gnu/6.4.0/include")
+    (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
+    (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
     ;; Shutdown rdm when leaving emacs.
     ;(add-hook 'kill-emacs-hook 'rtags-quit-rdm)
     ))
