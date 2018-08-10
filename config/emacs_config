@@ -73,6 +73,13 @@
 "Select Nth next window."
 (interactive "P")
 (other-window (prefix-numeric-value n)))
+
+;---------------------------------------------
+; xterm mouse scrolling
+(xterm-mouse-mode)
+(global-set-key (kbd "<mouse-4>") 'previous-line)
+(global-set-key (kbd "<mouse-5>") 'next-line)
+
 ;----------------------------------------------
 
 ;enable when better key bindings found
@@ -173,3 +180,16 @@
 
 (add-hook 'c-mode-hook
           (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+
+;; Helm
+(require 'helm)
+
+;; Speedbar config
+(require 'sr-speedbar)
+;(global-set-key (kbd "C-c t") 'sr-speedbar-toggle)
+(global-set-key [C-tab] 'sr-speedbar-toggle)
+
+;; Useful commands
+;;
+;; Display whitespace:
+;; M-x whitespace-toggle-options
