@@ -157,7 +157,6 @@
 (require 'company)
 (global-company-mode)
 (load "rtags/company-rtags")
-;(define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
 (define-key c-mode-base-map (kbd "M-/") 'company-complete)
 (use-package company-rtags
   :config
