@@ -2,7 +2,7 @@
 xterm*termName: xterm-256color
 
 ! XTerm*background: #272822
-xterm*foreground: #A0A0A0
+!xterm*foreground: #A0A0A0
 ! XTerm*cursorColor: #303030
 
 !Theme Fifteen
@@ -108,6 +108,10 @@ xterm*color15:    rgb:f8/fc/f8
 ! Font configuration
 xterm*faceName: Terminus:style=Bold
 xterm*faceSize: 14
+!xterm*font: -xos4-terminus-bold-r-normal--24-240-72-72-c-120-iso10646-1
+!xterm*font: -xos4-terminus-bold-r-normal--14-140-72-72-c-80-iso10646-1
+!xterm*font: -xos4-terminus-bold-r-normal--18-180-72-72-c-100-iso10646-1
+
 ! VT Font Menu: Unreadable
 xterm*faceSize1: 10
 ! VT font menu: Tiny
@@ -122,3 +126,5 @@ xterm*faceSize5: 22
 
 ! Key sequence configurations
 xterm*metaSendsEscape: true
+
+
