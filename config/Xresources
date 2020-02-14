@@ -123,8 +123,8 @@ xterm*faceSize4: 16
 ! VT font menu: Huge
 xterm*faceSize5: 22
 
-
 ! Key sequence configurations
 xterm*metaSendsEscape: true
 
-
+! Scrollback history length
+xterm*saveLines: 10000
