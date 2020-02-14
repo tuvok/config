@@ -28,6 +28,36 @@
 (require 'magit)
 (global-set-key (kbd "C-x g s") 'magit-status)
 
+;Compiling and debugging
+(defun open-gdb-frame()
+  "Switch to gdb debugging frame (create it first if it doesn't exist yet)."
+  (interactive)
+  (if (eq gdb-special-frame (selected-frame))
+      (progn
+        (other-frame 1)
+        )
+    (if (and (boundp 'gdb-special-frame) (frame-live-p gdb-special-frame))
+        (progn
+          (select-frame-set-input-focus gdb-special-frame)
+          )
+      (progn
+        (message "creating frame")
+        (setq gdb-special-frame (make-frame '((name . "GDBF"))))
+
+        (select-frame-set-input-focus gdb-special-frame)
+
+        (call-interactively 'gdb)
+
+;        (configure-all-buffers-the-way-i-like-them)
+
+        )
+      )
+    )
+  )
+
+(global-set-key (kbd "C-x g c") 'compile)
+(global-set-key (kbd "C-x g g") 'open-gdb-frame)
+
 ;Gentoo doesn't have /usr/local in package search path:
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 ;Add directory for user-local packages
