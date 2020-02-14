@@ -231,3 +231,7 @@
 ;;
 ;; Display whitespace:
 ;; M-x whitespace-toggle-options
+;;
+;; C-x C-n set semi permanent column goal
+;; C-u C-x C-n
+(put 'set-goal-column 'disabled nil)
