@@ -216,6 +216,9 @@
 (add-hook 'c++-mode-hook
           (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 
+;Find other file binding for C/C++ mode
+(define-key c-mode-base-map (kbd "C-x j") 'ff-find-related-file)
+
 ;; Helm
 (require 'helm)
 
