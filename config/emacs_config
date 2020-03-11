@@ -76,6 +76,9 @@
   (newline-and-indent))
 (global-set-key (kbd "RET") 'custom-indent)
 
+; don't indent namespaces
+(c-set-offset 'innamespace 0)
+
 ; treat .h as C++:
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
