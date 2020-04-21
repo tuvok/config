@@ -1,0 +1,5 @@
+# zone signing key
+dnssec-keygen -a NSEC3RSASHA1 -b 2048 -n ZONE example.com
+# key signing key
+dnssec-keygen -f KSK -a NSEC3RSASHA1 -b 4096 -n ZONE example.com
+dnssec-signzone -A -N INCREMENT -o domain.eu -t ./db.domain.eu
