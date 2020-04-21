@@ -21,8 +21,9 @@
 (menu-bar-mode -1) ; turn off menu bar
 
 (use-package which-key ; Key bindings help
-  :ensure t)
-(which-key-mode)
+  :ensure t
+  :config (which-key-mode)
+  )
 
 (global-linum-mode t) ; display line numbers
 (setq linum-format "%4d \u2502 ") ; prittier line numbers
@@ -49,15 +50,37 @@
 
 ;; Helm
 (use-package helm
-  :ensure t)
+  :ensure t
+  :config (helm-mode)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  )
+
+;; Themes
+(use-package gruvbox-theme
+  :ensure t
+  :config (load-theme 'gruvbox-dark-hard t)
+  )
+
+;; Highlight parentheses
+(setq show-paren-style 'paren)
+(show-paren-mode)
+
+(use-package smartparens
+  :ensure t
+  :config (smartparens-global-mode)
+  )
 
 ;; Programming configuration -----------------------------
 (require 'cc-mode) ; some key-binding configurations below require this
 
 ;; Git integration
 (use-package magit
+  :ensure t
+  :config (global-set-key (kbd "C-x g s") 'magit-status)
+  )
+
+(use-package git-timemachine
   :ensure t)
-(global-set-key (kbd "C-x g s") 'magit-status)
 
 ;; Yasnippet
 (use-package yasnippet
@@ -65,9 +88,11 @@
 
 ;; Company mode
 (use-package company
-  :ensure t)
-(global-company-mode)
-(define-key c-mode-base-map (kbd "M-/") 'company-complete)
+  :ensure t
+  :config
+  (global-company-mode)
+  (define-key c-mode-base-map (kbd "M-/") 'company-complete)
+  )
 
 ;; Flycheck
 (use-package flycheck
@@ -77,27 +102,26 @@
 (use-package rtags
   :ensure t
   :config
-  (progn
-    (unless (rtags-executable-find "rc") (error "Binary rc is not installed!"))
-    (unless (rtags-executable-find "rdm") (error "Binary rdm is not installed!"))
+  (unless (rtags-executable-find "rc") (error "Binary rc is not installed!"))
+  (unless (rtags-executable-find "rdm") (error "Binary rdm is not installed!"))
 
-    (define-key c-mode-base-map (kbd "M-.") 'rtags-find-symbol-at-point)
-    (define-key c-mode-base-map (kbd "M-,") 'rtags-find-references-at-point)
-    (define-key c-mode-base-map (kbd "M-?") 'rtags-display-summary)
-    ;;(define-key c-mode-base-map (kbd "s-B") 'rtags-location-stack-back)
-    ;;(define-key c-mode-base-map (kbd "s-F") 'rtags-location-stack-forward)
-    ;;(define-key c-mode-base-map (kbd "C-S-D") 'rtags-diagnostics)
+  (define-key c-mode-base-map (kbd "M-.") 'rtags-find-symbol-at-point)
+  (define-key c-mode-base-map (kbd "M-,") 'rtags-find-references-at-point)
+  (define-key c-mode-base-map (kbd "M-?") 'rtags-display-summary)
+  ;;(define-key c-mode-base-map (kbd "s-B") 'rtags-location-stack-back)
+  ;;(define-key c-mode-base-map (kbd "s-F") 'rtags-location-stack-forward)
+  ;;(define-key c-mode-base-map (kbd "C-S-D") 'rtags-diagnostics)
 
-    (setq rtags-use-helm t)
+  (setq rtags-use-helm t)
 
-    (rtags-enable-standard-keybindings)
-    (setq rtags-autostart-diagnostics t)
+  (rtags-enable-standard-keybindings)
+  (setq rtags-autostart-diagnostics t)
 
-    ;; Start rdm when entering c/c++ modes
-    (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
-    (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
-    (add-hook 'kill-emacs-hook 'rtags-quit-rdm)
-    ))
+  ;; Start rdm when entering c/c++ modes
+  (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
+  (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
+  (add-hook 'kill-emacs-hook 'rtags-quit-rdm)
+  )
 
 (use-package helm-rtags
   :ensure t)
@@ -105,24 +129,26 @@
 (use-package company-rtags
   :ensure t
   :config
-  (progn
-    (setq rtags-completions-enabled t)
-    (push 'company-rtags company-backends)
-    ))
+  (setq rtags-completions-enabled t)
+  (push 'company-rtags company-backends)
+  )
 
 (use-package flycheck-rtags
   :ensure t
   :config
-  (progn
-    (defun setup-flycheck-rtags ()
-      (flycheck-select-checker 'rtags)
-      (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
-      (setq-local flycheck-check-syntax-automatically nil)
-      (rtags-set-periodic-reparse-timeout 0)  ;; Run flycheck 2 seconds after being idle.
-      )
-    (add-hook 'c-mode-hook #'setup-flycheck-rtags)
-    (add-hook 'c++-mode-hook #'setup-flycheck-rtags)
-    ))
+  (defun setup-flycheck-rtags ()
+    (flycheck-select-checker 'rtags)
+    (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+    (setq-local flycheck-check-syntax-automatically nil)
+    (rtags-set-periodic-reparse-timeout 0)  ;; Run flycheck 2 seconds after being idle.
+    )
+  (add-hook 'c-mode-hook #'setup-flycheck-rtags)
+  (add-hook 'c++-mode-hook #'setup-flycheck-rtags)
+  )
+
+(use-package qml-mode
+  :ensure t
+  )
 
 ;; LSP mode
 ;;(use-package lsp-mode
