@@ -1,6 +1,6 @@
 ; -*-Lisp-*-
 
-;; General configuration ---------------------------------
+;; Package management ------------------------------------
 (require 'package)
 (package-initialize)
 (add-to-list
@@ -8,6 +8,13 @@
  '("melpa" . "http://stable.melpa.org/packages/")
  t)
 
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(require 'use-package)
+
+;; General configuration ---------------------------------
 (setq scroll-step 1) ; scroll one line at a time
 (setq-default indent-tabs-mode nil) ; indent with spaces
 (global-set-key (kbd "C-o") 'other-window) ; use Ctrl-o to switch windows
