@@ -1,1 +1,18 @@
+new way:
+https://wiki.gentoo.org/wiki/PostgreSQL/QuickStart#Migrating_PostgreSQL
+
+if /var/lib/postgresql/new.version/data is empty:
+emerge --config =dev-db/postgresql-new.version
+
+eselect postgresql set new.version
+
+su - postgres
+
+pg_upgrade -U postgres -d /var/lib/postgresql/11/data/ -D /var/lib/postgresql/12/data/ -b /usr/lib/postgresql-11/bin/ -B /usr/lib/postgresql-12/bin/
+
+ctrl-d
+
+rc-update....
+
+old way:
 pg_dumpall -p 5432 | psql -d postgres -p 5433
