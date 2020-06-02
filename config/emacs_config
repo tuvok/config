@@ -200,6 +200,9 @@
 ;; Find other file binding for C/C++ mode
 (define-key c-mode-base-map (kbd "C-x j") 'ff-find-related-file)
 
+;; Load local configuration, not shrared on github:
+(load "~/.emacs.d/local.el")
+
 ;; Useful commands
 ;;
 ;; Display whitespace:
