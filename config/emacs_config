@@ -70,6 +70,9 @@
   :config (smartparens-global-mode)
   )
 
+;; Org mode
+(define-key global-map "\C-ca" 'org-agenda)
+(define-key global-map "\C-cc" 'org-capture)
 ;; Programming configuration -----------------------------
 (require 'cc-mode) ; some key-binding configurations below require this
 
