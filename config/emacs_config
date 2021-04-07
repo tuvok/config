@@ -1,6 +1,10 @@
 ; -*-Lisp-*-
 
 ;; Package management ------------------------------------
+
+; Otherwise connection to melpa fails:
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
 (require 'package)
 (package-initialize)
 (add-to-list
