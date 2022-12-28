@@ -1,1 +1,9 @@
+# http needs to be unblocked for the challenges to work
 certbot certonly -d domain.eu
+
+# renew
+certbot renew
+
+# update cert for courier imap
+cd /etc/letsencrypt/live/domain.eu
+cat privkey.pem fullchain.pem > /etc/courier-imap/imapd-lets.pem
