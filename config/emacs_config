@@ -62,15 +62,15 @@
 ;----------------------------------------------
 ;Window switching with C-j and C-J
 
-(defun other-window-backward (&optional n)
-"Select Nth previous window."
-(interactive "P")
-(other-window (- (prefix-numeric-value n))))
-
-(defun other-window-forward (&optional n)
-"Select Nth next window."
-(interactive "P")
-(other-window (prefix-numeric-value n)))
+;(defun other-window-backward (&optional n)
+;"Select Nth previous window."
+;(interactive "P")
+;(other-window (- (prefix-numeric-value n))))
+;
+;(defun other-window-forward (&optional n)
+;"Select Nth next window."
+;(interactive "P")
+;(other-window (prefix-numeric-value n)))
 
 ;----------------------------------------------
 
