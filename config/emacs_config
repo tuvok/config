@@ -29,8 +29,9 @@
   :config (which-key-mode)
   )
 
-(global-linum-mode t) ; display line numbers
-(setq linum-format "%4d \u2502 ") ; prittier line numbers
+;;(global-linum-mode t) ; display line numbers
+(global-display-line-numbers-mode t)
+;;(setq linum-format "%4d \u2502 ") ; prittier line numbers
 (column-number-mode t) ; display column number
 
 ;; one line scrolling keys (without moving pointer):
@@ -49,14 +50,14 @@
 
 ;; xterm mouse scrolling
 (xterm-mouse-mode)
-(global-set-key (kbd "<mouse-4>") 'previous-line)
-(global-set-key (kbd "<mouse-5>") 'next-line)
+(global-set-key (kbd "<wheel-up>") 'previous-line)
+(global-set-key (kbd "<wheel-down>") 'next-line)
 
 ;; Helm
 (use-package helm
   :ensure t
   :config (helm-mode)
-  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files))
 
 ;----------------------------------------------
 ;Window switching with C-j and C-J
@@ -95,6 +96,14 @@
 ;; Org mode
 (define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cc" 'org-capture)
+(setq org-agenda-files (list "~/org/general.org"))
+(setq org-default-notes-file "~/org/general.org")
+(add-hook 'org-mode-hook #'visual-line-mode)
+
+;; Email
+(setq message-send-mail-function 'smtpmail-send-it) ; default: mailclient-send-it
+
+
 ;; Programming configuration -----------------------------
 (require 'cc-mode) ; some key-binding configurations below require this
 
@@ -124,87 +133,89 @@
   :ensure t)
 
 ;; RTags
-(use-package rtags
-  :ensure t
-  :if (eq system-type 'gnu/linux)
-  :config
-  (unless (rtags-executable-find "rc") (error "Binary rc is not installed!"))
-  (unless (rtags-executable-find "rdm") (error "Binary rdm is not installed!"))
-
-  (define-key c-mode-base-map (kbd "M-.") 'rtags-find-symbol-at-point)
-  (define-key c-mode-base-map (kbd "M-,") 'rtags-find-references-at-point)
-  (define-key c-mode-base-map (kbd "M-?") 'rtags-display-summary)
-  ;;(define-key c-mode-base-map (kbd "s-B") 'rtags-location-stack-back)
-  ;;(define-key c-mode-base-map (kbd "s-F") 'rtags-location-stack-forward)
-  ;;(define-key c-mode-base-map (kbd "C-S-D") 'rtags-diagnostics)
-
-  (setq rtags-use-helm t)
-
-  (rtags-enable-standard-keybindings)
-  (setq rtags-autostart-diagnostics t)
-
-  ;; Start rdm when entering c/c++ modes
-  (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
-  (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
-  (add-hook 'kill-emacs-hook 'rtags-quit-rdm)
-  )
-
-(use-package helm-rtags
-  :ensure t
-  :if (eq system-type 'gnu/linux)
-  )
-
-(use-package company-rtags
-  :ensure t
-  :if (eq system-type 'gnu/linux)
-  :config
-  (setq rtags-completions-enabled t)
-  (push 'company-rtags company-backends)
-  )
-
-(use-package flycheck-rtags
-  :ensure t
-  :if (eq system-type 'gnu/linux)
-  :config
-  (defun setup-flycheck-rtags ()
-    (flycheck-select-checker 'rtags)
-    (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
-    (setq-local flycheck-check-syntax-automatically nil)
-    (rtags-set-periodic-reparse-timeout 0)  ;; Run flycheck 2 seconds after being idle.
-    )
-  (add-hook 'c-mode-hook #'setup-flycheck-rtags)
-  (add-hook 'c++-mode-hook #'setup-flycheck-rtags)
-  )
-
+;;(use-package rtags
+;;  :ensure t
+;;  :if (eq system-type 'gnu/linux)
+;;  :config
+;;  (unless (rtags-executable-find "rc") (error "Binary rc is not installed!"))
+;;  (unless (rtags-executable-find "rdm") (error "Binary rdm is not installed!"))
+;;
+;;  (define-key c-mode-base-map (kbd "M-.") 'rtags-find-symbol-at-point)
+;;  (define-key c-mode-base-map (kbd "M-,") 'rtags-find-references-at-point)
+;;  (define-key c-mode-base-map (kbd "M-?") 'rtags-display-summary)
+;;  ;;(define-key c-mode-base-map (kbd "s-B") 'rtags-location-stack-back)
+;;  ;;(define-key c-mode-base-map (kbd "s-F") 'rtags-location-stack-forward)
+;;  ;;(define-key c-mode-base-map (kbd "C-S-D") 'rtags-diagnostics)
+;;
+;;  (setq rtags-use-helm t)
+;;
+;;  (rtags-enable-standard-keybindings)
+;;  (setq rtags-autostart-diagnostics t)
+;;
+;;  ;; Start rdm when entering c/c++ modes
+;;  (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
+;;  (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
+;;  (add-hook 'kill-emacs-hook 'rtags-quit-rdm)
+;;  )
+;;
+;;(use-package helm-rtags
+;;  :ensure t
+;;  :if (eq system-type 'gnu/linux)
+;;  )
+;;
+;;(use-package company-rtags
+;;  :ensure t
+;;  :if (eq system-type 'gnu/linux)
+;;  :config
+;;  (setq rtags-completions-enabled t)
+;;  (push 'company-rtags company-backends)
+;;  )
+;;
+;;(use-package flycheck-rtags
+;;  :ensure t
+;;  :if (eq system-type 'gnu/linux)
+;;  :config
+;;  (defun setup-flycheck-rtags ()
+;;    (flycheck-select-checker 'rtags)
+;;    (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+;;    (setq-local flycheck-check-syntax-automatically nil)
+;;    (rtags-set-periodic-reparse-timeout 2)  ;; Run flycheck 2 seconds after being idle.
+;;    )
+;;  (add-hook 'c-mode-hook #'setup-flycheck-rtags)
+;;  (add-hook 'c++-mode-hook #'setup-flycheck-rtags)
+;;  )
+;;
 (use-package qml-mode
   :ensure t
   )
 
 ;; LSP mode
-;;(use-package lsp-mode
-;;  :ensure t
-;;  :hook ((c++-mode . lsp)
-;;         (c-mode . lsp)
-;;         (lsp-mode . lsp-enable-which-key-integration))
-;;  :commands lsp)
+(use-package lsp-mode
+  :ensure t
+  :hook ((c++-mode . lsp)
+         (c-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
 ;;(setq lsp-keymap-prefix "C-c l")
 ;;
 ;;(use-package lsp-ui
 ;;  :ensure t
 ;;  :commands lsp-ui-mode)
 ;;
-;;(use-package company-lsp
-;;  :ensure t
-;;  :commands company-lsp
-;;  :config (push 'company-lsp company-backends))
+(use-package company-lsp
+  :ensure t
+  :commands company-lsp
+  :config (push 'company-lsp company-backends))
 
 ;; if you are helm user
-;(use-package helm-lsp :commands helm-lsp-workspace-symbol)
+(use-package helm-lsp :commands helm-lsp-workspace-symbol)
 ;; if you are ivy user
 ;(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-;(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
-
-
+(use-package lsp-treemacs
+    :ensure t
+    :commands lsp-treemacs-errors-list)
+(setq read-process-output-max (* 1024 1024))
+(setq gc-cons-threshold 100000000)
 ;; C/C++ specific configurations -------------------------
 (setq c-default-style "ellemtel") ; set indentation style
 (setq c-basic-offset 4) ; 4 spaces indentation
@@ -234,15 +245,15 @@
 ;; C-x C-n set semi permanent column goal
 ;; C-u C-x C-n
 ;(put 'set-goal-column 'disabled nil)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(auth-source-save-behavior nil)
  '(package-selected-packages
-   (quote
-    (which-key use-package sr-speedbar qml-mode helm flycheck company))))
+   '(lsp-treemacs yasnippet which-key use-package smartparens qml-mode magit lsp-ui helm-rtags gruvbox-theme git-timemachine flycheck-rtags company-rtags company-lsp))
+ '(send-mail-function 'mailclient-send-it))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
