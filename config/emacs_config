@@ -57,7 +57,25 @@
   :ensure t
   :config (helm-mode)
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
-  )
+
+;----------------------------------------------
+;Window switching with C-j and C-J
+
+(defun other-window-backward (&optional n)
+"Select Nth previous window."
+(interactive "P")
+(other-window (- (prefix-numeric-value n))))
+
+(defun other-window-forward (&optional n)
+"Select Nth next window."
+(interactive "P")
+(other-window (prefix-numeric-value n)))
+
+;----------------------------------------------
+
+;enable when better key bindings found
+;(global-set-key (kbd "C-j") 'other-window-backward)
+;(global-set-key (kbd "C-J") 'other-window-forward)
 
 ;; Themes
 (use-package gruvbox-theme
@@ -211,6 +229,7 @@
 ;;
 ;; Display whitespace:
 ;; M-x whitespace-toggle-options
+
 ;;
 ;; C-x C-n set semi permanent column goal
 ;; C-u C-x C-n
@@ -221,7 +240,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (magit use-package))))
+ '(package-selected-packages
+   (quote
+    (which-key use-package sr-speedbar qml-mode helm flycheck company))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

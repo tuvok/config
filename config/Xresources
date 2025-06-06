@@ -66,47 +66,47 @@ xterm*termName: xterm-256color
 !xterm*color15:    rgb:ff/ff/ff
 
 !Theme Two
-!xterm*background: rgb:00/00/00
-!xterm*foreground: rgb:7f/7f/7f
-!xterm*color0:     rgb:00/00/00
-!xterm*color1:     rgb:9e/18/28
-!xterm*color2:     rgb:ae/ce/92
-!xterm*color3:     rgb:96/8a/38
-!xterm*color4:     rgb:41/41/71
-!xterm*color5:     rgb:96/3c/59
-!xterm*color6:     rgb:41/81/79
-!xterm*color7:     rgb:be/be/be
-!xterm*color8:     rgb:66/66/66
-!xterm*color9:     rgb:cf/61/71
-!xterm*color10:    rgb:c5/f7/79
-!xterm*color11:    rgb:ff/f7/96
-!xterm*color12:    rgb:41/86/be
-!xterm*color13:    rgb:cf/9e/be
-!xterm*color14:    rgb:71/be/be
-!xterm*color15:    rgb:ff/ff/ff
+xterm*background: rgb:00/00/00
+xterm*foreground: rgb:7f/7f/7f
+xterm*color0:     rgb:00/00/00
+xterm*color1:     rgb:9e/18/28
+xterm*color2:     rgb:ae/ce/92
+xterm*color3:     rgb:96/8a/38
+xterm*color4:     rgb:41/41/71
+xterm*color5:     rgb:96/3c/59
+xterm*color6:     rgb:41/81/79
+xterm*color7:     rgb:be/be/be
+xterm*color8:     rgb:66/66/66
+xterm*color9:     rgb:cf/61/71
+xterm*color10:    rgb:c5/f7/79
+xterm*color11:    rgb:ff/f7/96
+xterm*color12:    rgb:41/86/be
+xterm*color13:    rgb:cf/9e/be
+xterm*color14:    rgb:71/be/be
+xterm*color15:    rgb:ff/ff/ff
 
 !Theme One
-xterm*background: rgb:00/00/00
-xterm*foreground: rgb:a8/a8/a8
-xterm*color0:     rgb:00/00/00
-xterm*color1:     rgb:a8/00/00
-xterm*color2:     rgb:00/a8/00
-xterm*color3:     rgb:a8/54/00
-xterm*color4:     rgb:00/00/a8
-xterm*color5:     rgb:a8/00/a8
-xterm*color6:     rgb:00/a8/a8
-xterm*color7:     rgb:a8/a8/a8
-xterm*color8:     rgb:54/50/54
-xterm*color9:     rgb:f8/54/50
-xterm*color10:    rgb:50/fc/50
-xterm*color11:    rgb:f8/fc/50
-xterm*color12:    rgb:50/54/f8
-xterm*color13:    rgb:f8/54/f8
-xterm*color14:    rgb:50/fc/f8
-xterm*color15:    rgb:f8/fc/f8
+!xterm*background: rgb:00/00/00
+!xterm*foreground: rgb:a8/a8/a8
+!xterm*color0:     rgb:00/00/00
+!xterm*color1:     rgb:a8/00/00
+!xterm*color2:     rgb:00/a8/00
+!xterm*color3:     rgb:a8/54/00
+!xterm*color4:     rgb:00/00/a8
+!xterm*color5:     rgb:a8/00/a8
+!xterm*color6:     rgb:00/a8/a8
+!xterm*color7:     rgb:a8/a8/a8
+!xterm*color8:     rgb:54/50/54
+!xterm*color9:     rgb:f8/54/50
+!xterm*color10:    rgb:50/fc/50
+!xterm*color11:    rgb:f8/fc/50
+!xterm*color12:    rgb:50/54/f8
+!xterm*color13:    rgb:f8/54/f8
+!xterm*color14:    rgb:50/fc/f8
+!xterm*color15:    rgb:f8/fc/f8
 
 ! Font configuration
-xterm*faceName: Terminus:style=Bold
+xterm*faceName: Terminus:style=Normal
 xterm*faceSize: 14
 !xterm*font: -xos4-terminus-bold-r-normal--24-240-72-72-c-120-iso10646-1
 !xterm*font: -xos4-terminus-bold-r-normal--14-140-72-72-c-80-iso10646-1
@@ -127,4 +127,5 @@ xterm*faceSize5: 22
 xterm*metaSendsEscape: true
 
 ! Scrollback history length
-xterm*saveLines: 10000
+xterm*saveLines: 10000000
+
