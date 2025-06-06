@@ -29,6 +29,9 @@
   :config (which-key-mode)
   )
 
+;; backspace should delete last character
+(normal-erase-is-backspace-mode 1)
+
 ;;(global-linum-mode t) ; display line numbers
 (global-display-line-numbers-mode t)
 ;;(setq linum-format "%4d \u2502 ") ; prittier line numbers
